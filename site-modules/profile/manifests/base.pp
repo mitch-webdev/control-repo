@@ -2,7 +2,7 @@
 class profile::apache {
   class { 'apache':
     mpm_module    => false,
-    default_mods  => false,
+    #default_mods  => false,
     default_vhost => false,
     purge_configs => false,
   }
