@@ -29,3 +29,5 @@ node default {
   # Example:
   #   class { 'my_class': }
 }
+
+contain lookup('classes', Array[String], 'unique', [])
