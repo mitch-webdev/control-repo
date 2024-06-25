@@ -12,7 +12,8 @@ class profile::apache (
   }
 
   class { 'apache':
-    mpm_module => false,
+    vhost_dir     => '/etc/httpd/vhosts.d',
+    mpm_module    => false,
     default_vhost => $default_vhost,
     purge_configs => $purge_configs,
   }
