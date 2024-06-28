@@ -4,7 +4,6 @@ classes:
   profile::apache::vhosts:
     'test1.com':
       port: 80
-      docroot: '/var/www1'
       servername: 'test1.com'
       serveraliases:
         - 'www.test1.com'
@@ -14,7 +13,6 @@ classes:
         - {}
     'test2.com':
       port: 80
-      docroot: '/var/www2'
       servername: 'test2.com'
       serveraliases:
         - 'www.test2.com'
