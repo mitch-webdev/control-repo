@@ -36,4 +36,4 @@ class profile::apache (
 #    access_log => false,
 #    directories => [ {} ],
 #  }
-#}
+}
