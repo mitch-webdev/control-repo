@@ -1,22 +1,24 @@
 ---
 classes:
-  #  - 'profile::apache'
   profile::apache::vhosts:
-    'test1.com':
+    'example8.com':
       port: 80
-      servername: 'test1.com'
+      docroot: '/var/www1'
+      servername: 'www.example1.com'
       serveraliases:
-        - 'www.test1.com'
+        - 'example1.com'
+        - 'example2.com'
+        - 'example3.com'
+        - 'example4.com'
       error_log: false
       access_log: false
       directories:
         - {}
-    'test2.com':
-      port: 80
-      servername: 'test2.com'
+    'www.website1.com':
+      port: 81
+      docroot: '/var/www2'
+      servername: 'www.website1.com'
       serveraliases:
-        - 'www.test2.com'
+        - 'www.webiste2.com'
       error_log: false
       access_log: false
-      directories:
-        - {}
