@@ -23,7 +23,7 @@ profile::apache::vhosts:
     redirect_dest: 'https://example.com/'
     rewrite_rule: "^/.well-known/acme-challenge/(.*) /var/www/letsencrypt/.well-known/acme-challenge/$1 [L]"
     rewrite_cond: 
-      - "RewriteCond %{literal('%')}{SERVER_NAME} !^test.bgbern.ch$]"
+      - "RewriteCond %{literal('%')}{SERVER_NAME} !^test.bgbern.ch$"
     rewrite_rule: "^/(.*) http://127.0.0.1:10250/VirtualHostBase/https/%{literal('%')}{SERVER_NAME}:%{literal('%')}{SERVER_PORT}/bgbern/platform/VirtualHostRoot/$1 [P,L]"
   'www.website1.com':
     ip: 91.92.154.92
