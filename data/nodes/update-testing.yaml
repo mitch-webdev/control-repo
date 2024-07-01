@@ -4,15 +4,14 @@ classes:
  
  
 profile::apache::vhosts:
-  'example8.com':
+  'example.com non-ssl':
     ip: 91.92.154.92
     port: 80
-    port: 443
     docroot: false
     priority: false
-    servername: 'www.example1.com'
+    servername: 'example.com'
     serveraliases:
-      - 'example1.com'
+      - 'www.example.com'
       - 'example2.com'
       - 'example3.com'
       - 'example4.com'
@@ -20,10 +19,22 @@ profile::apache::vhosts:
     access_log: false
     directories:
       - {}
+  'example.com ssl':
+    ip: 91.92.154.92
+    port: 443
+    docroot: false
+    priority: false
+    servername: 'example.com'
+    serveraliases:
+      - 'www.example.com'
+      - 'example2.com'
+      - 'example3.com'
+      - 'example4.com'
+    error_log: false
+    access_log: false
   'www.website1.com':
     ip: 91.92.154.92
     port: 80
-    port: 443
     docroot: false
     priority: false
     servername: 'www.website1.com'
