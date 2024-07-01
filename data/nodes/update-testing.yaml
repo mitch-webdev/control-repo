@@ -5,6 +5,7 @@ classes:
  
 profile::apache::vhosts:
   'example8.com':
+    ip: 91.92.154.92
     port: 80
     docroot: false
     priority: false
@@ -19,6 +20,7 @@ profile::apache::vhosts:
     directories:
       - {}
   'www.website1.com':
+    ip: 91.92.154.92
     port: 81
     docroot: false
     priority: false
