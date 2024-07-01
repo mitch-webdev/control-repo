@@ -22,7 +22,6 @@ profile::apache::vhosts:
     redirect_status: 'permanent'
     redirect_dest: 'https://example.com/'
     port: 443
-    ssl: true
   'www.website1.com':
     ip: 91.92.154.92
     port: 80
