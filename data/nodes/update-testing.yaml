@@ -21,7 +21,7 @@ profile::apache::vhosts:
       - {}
     redirect_status: 'permanent'
     redirect_dest: 'https://example.com/'
-    port: 443
+    rewrite_rule: '^/(.*) http://127.0.0.1:10250/VirtualHostBase/https/%{SERVER_NAME}:%{SERVER_PORT}/bgbern/platform/VirtualHostRoot/$1 [P,L]'
   'www.website1.com':
     ip: 91.92.154.92
     port: 80
