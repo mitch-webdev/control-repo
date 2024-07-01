@@ -6,7 +6,8 @@ classes:
 profile::apache::vhosts:
   'example8.com':
     ip: 91.92.154.92
-    port: 80,443
+    port: 80
+    port: 443
     docroot: false
     priority: false
     servername: 'www.example1.com'
@@ -21,7 +22,8 @@ profile::apache::vhosts:
       - {}
   'www.website1.com':
     ip: 91.92.154.92
-    port: 80,443
+    port: 80
+    port: 443
     docroot: false
     priority: false
     servername: 'www.website1.com'
