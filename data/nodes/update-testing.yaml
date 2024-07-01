@@ -19,6 +19,8 @@ profile::apache::vhosts:
     access_log: false
     directories:
       - {}
+    redirect_status: 'permanent'
+    redirect_dest: 'https://example.com/'
   'example.com ssl':
     ip: 91.92.154.92
     port: 443
@@ -32,6 +34,7 @@ profile::apache::vhosts:
       - 'example4.com'
     error_log: false
     access_log: false
+    ssl: true
   'www.website1.com':
     ip: 91.92.154.92
     port: 80
