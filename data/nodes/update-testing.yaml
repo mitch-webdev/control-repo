@@ -6,6 +6,7 @@ classes:
 profile::apache::vhosts:
   'example8.com':
     port: 80
+    docroot: false
     priority: false
     servername: 'www.example1.com'
     serveraliases:
@@ -19,6 +20,7 @@ profile::apache::vhosts:
       - {}
   'www.website1.com':
     port: 81
+    docroot: false
     priority: false
     servername: 'www.website1.com'
     serveraliases:
