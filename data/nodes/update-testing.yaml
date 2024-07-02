@@ -16,7 +16,7 @@ profile::apache::vhosts:
       - 'example2.com'
       - 'example3.com'
       - 'example4.com'
-    logroot: "/var/log/httpd/"
+    logroot: "/var/log/httpd"
     error_log: false
     access_log: true
     access_log_file: "example.com-http-access.log"
