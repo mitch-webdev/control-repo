@@ -22,6 +22,7 @@ profile::apache::vhosts:
       - {}
     redirect_status: 'permanent'
     redirect_dest: 'https://example.com/'
+    comment: "Test comment"
     rewrites:
       - rewrite_rule: "^/.well-known/acme-challenge/(.*) /var/www/letsencrypt/.well-known/acme-challenge/$1 [L]"
       - rewrite_cond: 
