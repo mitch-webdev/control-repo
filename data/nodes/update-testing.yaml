@@ -46,4 +46,4 @@ profile::apache::vhosts:
       - rewrite_cond: 
         - "%{literal('%')}{SERVER_NAME} !^test.burgerbib.ch$"
       - rewrite_rule: "^/(.*)$ http://test.burgerbib.ch/$1 [R=301,L]"
-        #- rewrite_rule: "^/(.*) http://127.0.0.1:10250/VirtualHostBase/https/%{literal('%')}{SERVER_NAME}:%{literal('%')}{SERVER_PORT}/burgerbib/platform/VirtualHostRoot/$1 [P,L]" 
+        - rewrite_rule: "^/(.*) http://127.0.0.1:10250/VirtualHostBase/https/%{literal('%')}{SERVER_NAME}:%{literal('%')}{SERVER_PORT}/burgerbib/platform/VirtualHostRoot/$1 [P,L]" 
