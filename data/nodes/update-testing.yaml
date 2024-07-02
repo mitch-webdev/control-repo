@@ -46,17 +46,19 @@ profile::apache::vhosts:
     setenvif: [User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown downgrade-1.0 force-response-1.0]
     filters: [AddOutputFilterByType DEFLATE text/html text/xml text/plain, AddOutputFilterByType DEFLATE text/css, AddOutputFilterByType DEFLATE application/x-javascript application/javascript application/json]
     directories: [
-      <Location />,
-      auth_name: "Login bgbern",
-      auth_require: valid-user,
-        #AuthUserFile /etc/httpd/.htdigest.bgbern
-        #<RequireAny>
-        #  Require ip 46.140.112.106
-        #  Require ip 212.25.17.17
-        #  Require ip 192.168.4.0/24
-        #  Require ip 159.100.241.79
-        #  Require valid-user
-        #</RequireAny>
+      custom_fragment:
+        <Location />
+            AuthType Digest
+            AuthName "Login bgbern"
+            AuthUserFile /etc/httpd/.htdigest.bgbern
+            <RequireAny>
+              Require ip 46.140.112.106
+              Require ip 212.25.17.17
+              Require ip 192.168.4.0/24
+              Require ip 159.100.241.79
+              Require valid-user
+            </RequireAny>
+        </Location>
      ]
     rewrites:
       - rewrite_rule: "^/.well-known/acme-challenge/(.*) /var/www/letsencrypt/.well-known/acme-challenge/$1 [L]"
