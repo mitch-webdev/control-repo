@@ -5,6 +5,8 @@ classes:
  
 profile::apache::vhosts:
 
+############################################### START VHOST ####################################################
+
   'test.burgerbib.ch':
     ip: 91.92.154.92
     port: 80
@@ -43,6 +45,20 @@ profile::apache::vhosts:
     headers: [always set Strict-Transport-Security "max-age=63072000; includeSubDomains"]
     setenvif: [User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown downgrade-1.0 force-response-1.0]
     filters: [AddOutputFilterByType DEFLATE text/html text/xml text/plain, AddOutputFilterByType DEFLATE text/css, AddOutputFilterByType DEFLATE application/x-javascript application/javascript application/json]
+    directories: [
+      <Location />
+        AuthType Digest
+        AuthName "Login bgbern"
+        AuthUserFile /etc/httpd/.htdigest.bgbern
+        <RequireAny>
+          Require ip 46.140.112.106
+          Require ip 212.25.17.17
+          Require ip 192.168.4.0/24
+          Require ip 159.100.241.79
+          Require valid-user
+        </RequireAny>
+      </Location>
+    ]
     rewrites:
       - rewrite_rule: "^/.well-known/acme-challenge/(.*) /var/www/letsencrypt/.well-known/acme-challenge/$1 [L]"
       - rewrite_cond: 
@@ -51,3 +67,5 @@ profile::apache::vhosts:
       - rewrite_rule: "^/(.*) http://127.0.0.1:10250/VirtualHostBase/https/%{literal('%')}{SERVER_NAME}:%{literal('%')}{SERVER_PORT}/burgerbib/platform/VirtualHostRoot/$1 [P,L]" 
     docroot: false
     priority: false
+
+############################################### END VHOST ####################################################
