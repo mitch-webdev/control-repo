@@ -46,7 +46,7 @@ profile::apache::vhosts:
     setenvif: [User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown downgrade-1.0 force-response-1.0]
     filters: [AddOutputFilterByType DEFLATE text/html text/xml text/plain, AddOutputFilterByType DEFLATE text/css, AddOutputFilterByType DEFLATE application/x-javascript application/javascript application/json]
     directories: [
-      custom_fragment:
+      custom_fragment: {
         '<Location />
             AuthType Digest
             AuthName "Login bgbern"
@@ -59,6 +59,7 @@ profile::apache::vhosts:
               Require valid-user
             </RequireAny>
         </Location>'
+      }
      ]
     rewrites:
       - rewrite_rule: "^/.well-known/acme-challenge/(.*) /var/www/letsencrypt/.well-known/acme-challenge/$1 [L]"
