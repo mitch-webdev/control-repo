@@ -33,6 +33,11 @@ profile::apache::vhosts:
     ssl_honorcipherorder: false
     ssl_stapling: true
     setenvif: [User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown downgrade-1.0 force-response-1.0]
+    filters: [
+      AddOutputFilterByType DEFLATE text/html text/xml text/plain,
+      AddOutputFilterByType DEFLATE text/css,
+      AddOutputFilterByType DEFLATE application/x-javascript application/javascript application/json,
+    ]
     servername: 'test.burgerbib.ch'
     serveraliases:
       - 'www.test.burgerbib.ch'
