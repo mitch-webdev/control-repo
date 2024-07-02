@@ -16,13 +16,13 @@ profile::apache::vhosts:
       - 'example2.com'
       - 'example3.com'
       - 'example4.com'
+    logroot: "/var/log/httpd/"
     error_log: false
-    access_log: false
+    access_log: "example.com-http-access.log"
     directories:
       - {}
     redirect_status: 'permanent'
     redirect_dest: 'https://example.com/'
-    comment: "Test comment"
     rewrites:
       - rewrite_rule: "^/.well-known/acme-challenge/(.*) /var/www/letsencrypt/.well-known/acme-challenge/$1 [L]"
       - rewrite_cond: 
