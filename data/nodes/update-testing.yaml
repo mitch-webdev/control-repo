@@ -28,13 +28,4 @@ profile::apache::vhosts:
         - "%{literal('%')}{SERVER_NAME} !^example.com$"
       - rewrite_rule: "^/(.*)$ http://example.com/$1 [R=301,L]"
       - rewrite_rule: "^/(.*) http://127.0.0.1:10250/VirtualHostBase/https/%{literal('%')}{SERVER_NAME}:%{literal('%')}{SERVER_PORT}/example/platform/VirtualHostRoot/$1 [P,L]"
-  'www.website1.com':
-    ip: 91.92.154.92
-    port: 80
-    docroot: false
-    priority: false
-    servername: 'www.website1.com'
-    serveraliases:
-      - 'www.webiste2.com'
-    error_log: false
-    access_log: false
+
