@@ -57,6 +57,7 @@ profile::apache::vhosts:
               Require valid-user
             </RequireAny>
         </Location>
+        - comment: " Always allow access to Let's Encrypt webroot"
         <Location /.well-known/acme-challenge/>
             Require all granted
         </Location>
