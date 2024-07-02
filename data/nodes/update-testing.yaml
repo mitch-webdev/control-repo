@@ -47,7 +47,7 @@ profile::apache::vhosts:
     filters: [AddOutputFilterByType DEFLATE text/html text/xml text/plain, AddOutputFilterByType DEFLATE text/css, AddOutputFilterByType DEFLATE application/x-javascript application/javascript application/json]
     directories: [
       custom_fragment:
-        <Location />
+        '<Location />
             AuthType Digest
             AuthName "Login bgbern"
             AuthUserFile /etc/httpd/.htdigest.bgbern
@@ -58,7 +58,7 @@ profile::apache::vhosts:
               Require ip 159.100.241.79
               Require valid-user
             </RequireAny>
-        </Location>
+        </Location>'
      ]
     rewrites:
       - rewrite_rule: "^/.well-known/acme-challenge/(.*) /var/www/letsencrypt/.well-known/acme-challenge/$1 [L]"
