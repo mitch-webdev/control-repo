@@ -9,7 +9,7 @@ profile::apache::vhosts:
     port: 80
     docroot: false
     priority: false
-    servername: 'example.com'
+    servername: 'test.burgerbib.ch'
     serveraliases:
       - 'www.test.burgerbib.ch'
     logroot: /var/log/httpd
@@ -22,6 +22,8 @@ profile::apache::vhosts:
   'test.burgerbib.ch-ssl':
     ip: 91.92.154.92
     port: 443
+    docroot: false
+    priority: false
     ssl: true
     ssl_cert: /etc/letsencrypt/live/test.burgerbib.ch/cert.pem
     ssl_key: /etc/letsencrypt/live/test.burgerbib.ch/privkey.pem
@@ -31,8 +33,6 @@ profile::apache::vhosts:
     ssl_honorcipherorder: false
     ssl_stapling: true
     setenvif: [User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown downgrade-1.0 force-response-1.0]
-    docroot: false
-    priority: false
     servername: 'test.burgerbib.ch'
     serveraliases:
       - 'www.test.burgerbib.ch'
