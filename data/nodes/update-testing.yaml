@@ -1,8 +1,7 @@
 ---
 classes:
   - 'profile::apache'
- 
- 
+
 profile::apache::vhosts:
 
 ############################################### START VHOST ####################################################
@@ -57,6 +56,9 @@ profile::apache::vhosts:
               Require ip 159.100.241.79
               Require valid-user
             </RequireAny>
+        </Location>
+        <Location /.well-known/acme-challenge/>
+            Require all granted
         </Location>
     rewrites:
       - rewrite_rule: "^/.well-known/acme-challenge/(.*) /var/www/letsencrypt/.well-known/acme-challenge/$1 [L]"
