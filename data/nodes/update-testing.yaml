@@ -45,7 +45,7 @@ profile::apache::vhosts:
     headers: [always set Strict-Transport-Security "max-age=63072000; includeSubDomains"]
     setenvif: [User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown downgrade-1.0 force-response-1.0]
     filters: [AddOutputFilterByType DEFLATE text/html text/xml text/plain, AddOutputFilterByType DEFLATE text/css, AddOutputFilterByType DEFLATE application/x-javascript application/javascript application/json]
-    custom_fragment:
+    custom_fragment: |
         <Location />
             AuthType Digest
             AuthName "Login bgbern"
