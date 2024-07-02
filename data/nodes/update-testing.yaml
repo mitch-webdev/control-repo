@@ -62,6 +62,7 @@ profile::apache::vhosts:
         </Location>
     rewrites:
       - rewrite_rule: "^/.well-known/acme-challenge/(.*) /var/www/letsencrypt/.well-known/acme-challenge/$1 [L]"
+      - comment: "Test comment"
       - rewrite_rule: "^/(contact|@@contact|contact-info|@@contact-info)$ https://test.burgerbib.ch/de/generischer-kontaktformular-link [R=302,L]"
       - rewrite_cond: 
         - "%{literal('%')}{SERVER_NAME} !^test.burgerbib.ch$"
