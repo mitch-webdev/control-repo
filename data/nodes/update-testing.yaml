@@ -46,8 +46,10 @@ profile::apache::vhosts:
     setenvif: [User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown downgrade-1.0 force-response-1.0]
     filters: [AddOutputFilterByType DEFLATE text/html text/xml text/plain, AddOutputFilterByType DEFLATE text/css, AddOutputFilterByType DEFLATE application/x-javascript application/javascript application/json]
     directories: [
-      - auth_type: 'Digest'
-      - auth_name: "Login bgbern"
+      path: '/',
+      auth_type: 'Digest',
+      auth_name: "Login bgbern",
+      auth_require: valid-user,
         #AuthUserFile /etc/httpd/.htdigest.bgbern
         #<RequireAny>
         #  Require ip 46.140.112.106
