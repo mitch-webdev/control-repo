@@ -7,37 +7,37 @@ profile::apache::vhosts:
 
 ############################################### START VHOST ####################################################
 
-  'example.com':
+  'test.burgerbib.ch':
     ip: 91.92.154.92
     port: 80
-    servername: 'example.com'
+    servername: 'test.burgerbib.ch'
     serveraliases:
-      - 'www.example.com'
+      - 'www.test.burgerbib.ch'
     logroot: /var/log/httpd
     error_log: true
-    error_log_file: example.com-http-error.log
+    error_log_file: test.burgerbib.ch-http-error.log
     access_log: true
-    access_log_file: example.com-http-access.log
+    access_log_file: test.burgerbib.ch-http-access.log
     redirect_status: 'permanent'
-    redirect_dest: 'https://example.com/'
+    redirect_dest: 'https://test.burgerbib.ch/'
     docroot: false
     priority: false
 
-  'example.com-ssl':
+  'test.burgerbib.ch-ssl':
     ip: 91.92.154.92
     port: 443
-    servername: 'example.com'
+    servername: 'test.burgerbib.ch'
     serveraliases:
-      - 'www.example.com'
+      - 'www.test.burgerbib.ch'
     logroot: /var/log/httpd
     error_log: true
-    error_log_file: example.com-http-error.log
+    error_log_file: test.burgerbib.ch-http-error.log
     access_log: true
-    access_log_file: example.com-http-access.log
+    access_log_file: test.burgerbib.ch-http-access.log
     ssl: true
-    ssl_cert: /etc/letsencrypt/live/example.com/cert.pem
-    ssl_key: /etc/letsencrypt/live/example.com/privkey.pem
-    ssl_chain: /etc/letsencrypt/live/example.com/chain.pem
+    ssl_cert: /etc/letsencrypt/live/test.burgerbib.ch/cert.pem
+    ssl_key: /etc/letsencrypt/live/test.burgerbib.ch/privkey.pem
+    ssl_chain: /etc/letsencrypt/live/test.burgerbib.ch/chain.pem
     ssl_protocol: all -SSLv3 -TLSv1 -TLSv1.1
     ssl_cipher: ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384
     ssl_honorcipherorder: false
@@ -49,10 +49,13 @@ profile::apache::vhosts:
       custom_fragment: {
         '<Location />
             AuthType Digest
-            AuthName "Login example.com"
-            AuthUserFile /etc/httpd/.htdigest.example.com
+            AuthName "Login bgbern"
+            AuthUserFile /etc/httpd/.htdigest.bgbern
             <RequireAny>
-              Require ip 8.8.8.8
+              Require ip 46.140.112.106
+              Require ip 212.25.17.17
+              Require ip 192.168.4.0/24
+              Require ip 159.100.241.79
               Require valid-user
             </RequireAny>
         </Location>'
@@ -60,11 +63,11 @@ profile::apache::vhosts:
     ]
     rewrites:
       - rewrite_rule: "^/.well-known/acme-challenge/(.*) /var/www/letsencrypt/.well-known/acme-challenge/$1 [L]"
-      - rewrite_rule: "^/(contact|@@contact|contact-info|@@contact-info)$ https://example.com/de/generischer-kontaktformular-link [R=302,L]"
+      - rewrite_rule: "^/(contact|@@contact|contact-info|@@contact-info)$ https://test.burgerbib.ch/de/generischer-kontaktformular-link [R=302,L]"
       - rewrite_cond: 
-        - "%{literal('%')}{SERVER_NAME} !^example.com$"
-      - rewrite_rule: "^/(.*)$ http://example.com/$1 [R=301,L]"
-      - rewrite_rule: "^/(.*) http://127.0.0.1:10250/VirtualHostBase/https/%{literal('%')}{SERVER_NAME}:%{literal('%')}{SERVER_PORT}/example.com/platform/VirtualHostRoot/$1 [P,L]" 
+        - "%{literal('%')}{SERVER_NAME} !^test.burgerbib.ch$"
+      - rewrite_rule: "^/(.*)$ http://test.burgerbib.ch/$1 [R=301,L]"
+      - rewrite_rule: "^/(.*) http://127.0.0.1:10250/VirtualHostBase/https/%{literal('%')}{SERVER_NAME}:%{literal('%')}{SERVER_PORT}/burgerbib/platform/VirtualHostRoot/$1 [P,L]" 
     docroot: false
     priority: false
 
