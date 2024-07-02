@@ -45,9 +45,9 @@ profile::apache::vhosts:
     headers: [always set Strict-Transport-Security "max-age=63072000; includeSubDomains"]
     setenvif: [User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown downgrade-1.0 force-response-1.0]
     filters: [AddOutputFilterByType DEFLATE text/html text/xml text/plain, AddOutputFilterByType DEFLATE text/css, AddOutputFilterByType DEFLATE application/x-javascript application/javascript application/json]
-    directories: [{
-      auth_type: 'Digest'
-      auth_name: "Login bgbern"
+    directories: [
+      - auth_type: 'Digest'
+      - auth_name: "Login bgbern"
         #AuthUserFile /etc/httpd/.htdigest.bgbern
         #<RequireAny>
         #  Require ip 46.140.112.106
@@ -56,7 +56,7 @@ profile::apache::vhosts:
         #  Require ip 159.100.241.79
         #  Require valid-user
         #</RequireAny>
-     }]
+     ]
     rewrites:
       - rewrite_rule: "^/.well-known/acme-challenge/(.*) /var/www/letsencrypt/.well-known/acme-challenge/$1 [L]"
       - rewrite_cond: 
