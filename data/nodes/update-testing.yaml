@@ -7,6 +7,25 @@ profile::apache::vhosts:
   'example.com':
     ip: 91.92.154.92
     port: 80
+    docroot: false
+    priority: false
+    servername: 'example.com'
+    serveraliases:
+      - 'www.example.com'
+      - 'example2.com'
+      - 'example3.com'
+      - 'example4.com'
+    logroot: /var/log/httpd
+    error_log: true
+    error_log_file: example.com-http-error.log
+    access_log: true
+    access_log_file: example.com-http-access.log
+    directories:
+      - {}
+    redirect_status: 'permanent'
+    redirect_dest: 'https://example.com/'
+  'example.com-ssl':
+    ip: 91.92.154.92
     port: 443
     docroot: false
     priority: false
@@ -17,17 +36,13 @@ profile::apache::vhosts:
       - 'example3.com'
       - 'example4.com'
     logroot: /var/log/httpd
-    error_log: false
+    error_log: true
+    error_log_file: example.com-http-error.log
     access_log: true
-    access_log_file: 'example.com-http-access.log'
-    directories:
-      - {}
-    redirect_status: 'permanent'
-    redirect_dest: 'https://example.com/'
+    access_log_file: example.com-http-access.log
     rewrites:
       - rewrite_rule: "^/.well-known/acme-challenge/(.*) /var/www/letsencrypt/.well-known/acme-challenge/$1 [L]"
       - rewrite_cond: 
         - "%{literal('%')}{SERVER_NAME} !^example.com$"
       - rewrite_rule: "^/(.*)$ http://example.com/$1 [R=301,L]"
-      - rewrite_rule: "^/(.*) http://127.0.0.1:10250/VirtualHostBase/https/%{literal('%')}{SERVER_NAME}:%{literal('%')}{SERVER_PORT}/example/platform/VirtualHostRoot/$1 [P,L]"
-
+        #- rewrite_rule: "^/(.*) http://127.0.0.1:10250/VirtualHostBase/https/%{literal('%')}{SERVER_NAME}:%{literal('%')}{SERVER_PORT}/example/platform/VirtualHostRoot/$1 [P,L]" 
