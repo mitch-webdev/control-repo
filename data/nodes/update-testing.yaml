@@ -108,7 +108,7 @@ profile::apache::vhosts:
     ssl_stapling: true
     headers: [always set Strict-Transport-Security "max-age=63072000; includeSubDomains"]
     headers: [set X-Frame-Options: "ALLOW-FROM https://publicjobs.ch"]
-    setenvif: [Origin "^https?://[^/]*(pam-ai.abacuscity.ch|publicjobs.ch)$" ORIGIN=$0]
+    setenvif: ["Origin \"^https?://[^/]*(pam-ai.abacuscity.ch|publicjobs.ch)$\" ORIGIN=$0"]
     headers: [set Access-Control-Allow-Origin %{ORIGIN}e env=ORIGIN]
     headers: [set Access-Control-Allow-Credentials "true" env=ORIGIN]
     headers: [merge Vary Origin]
