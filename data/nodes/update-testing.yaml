@@ -75,64 +75,64 @@ profile::apache::vhosts:
 
 ############################################### START VHOST ####################################################
 
-  'ai-web-test.webcloud7.ch':
-    ip: 91.92.154.92
-    port: 80
-    servername: 'ai-web-test.webcloud7.ch'
-    logroot: /var/log/httpd
-    error_log: true
-    error_log_file: ai-web-test.webcloud7.ch-http-error.log
-    access_log: true
-    access_log_file: ai-web-test.webcloud7.ch-http-access.log
-    redirect_status: 'permanent'
-    redirect_dest: 'https://ai-web-test.webcloud7.ch/'
-    docroot: false
-    priority: false
-
-  'ai-web-test.webcloud7.ch-ssl':
-    ip: 91.92.154.92
-    port: 443
-    servername: 'ai-web-test.webcloud7.ch'
-    logroot: /var/log/httpd
-    error_log: true
-    error_log_file: ai-web-test.webcloud7.ch-http-error.log
-    access_log: true
-    access_log_file: ai-web-test.webcloud7.ch-http-access.log
-    ssl: true
-    ssl_cert: /etc/letsencrypt/live/ai-web-test.webcloud7.ch/cert.pem
-    ssl_key: /etc/letsencrypt/live/ai-web-test.webcloud7.ch/privkey.pem
-    ssl_chain: /etc/letsencrypt/live/ai-web-test.webcloud7.ch/chain.pem
-    ssl_protocol: all -SSLv3 -TLSv1 -TLSv1.1
-    ssl_cipher: ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384
-    ssl_honorcipherorder: false
-    ssl_stapling: true
-    headers: [always set Strict-Transport-Security "max-age=63072000; includeSubDomains"]
-    headers: [set X-Frame-Options: "ALLOW-FROM https://publicjobs.ch"]
-    setenvif: ["Origin \"^https?://[^/]*(pam-ai.abacuscity.ch|publicjobs.ch)$\" ORIGIN=$0"]
-    headers: ["set Access-Control-Allow-Origin %{literal('%')}{ORIGIN}e env=ORIGIN"]
-    headers: ["set Access-Control-Allow-Credentials \"true\" env=ORIGIN"]
-    headers: [merge Vary Origin]
-    setenvif: [User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown downgrade-1.0 force-response-1.0]
-    filters: [AddOutputFilterByType DEFLATE text/html text/xml text/plain, AddOutputFilterByType DEFLATE text/css, AddOutputFilterByType DEFLATE application/x-javascript application/javascript application/json]
-    custom_fragment: |
-      #<Location />
-        #<RequireAny>
-            #Require ip 46.140.112.106
-              #Require ip 212.25.17.17
-              #Require ip 172.29.0.0/16
-              #Require ip 194.147.134.0/23
-        #</RequireAny>
-      #</Location>
-    rewrites:
-      - comment: "Let's Encrypt Webroot"
-      - rewrite_rule: "^/.well-known/acme-challenge/(.*) /var/www/letsencrypt/.well-known/acme-challenge/$1 [L]"
-      - rewrite_rule: "^/_vv($|/)(.*) https://vv-ai.4teamwork.ch/_vv/$2 [P,L]"
-      - rewrite_rule: "^/_vk($|/)(.*) https://vk-ai.4teamwork.ch/_vk/$2 [P,L]"
-      - rewrite_cond: '%{literal("%")}{HTTP_USER_AGENT} "(Microsoft Office|Outlook|Turnitin|Amazonbot|Reserva Room Signage|SemrushBot|BLEXBot|AhrefsBot|Yeti|DataForSeoBot|YandexBot|MegaIndex|SeekportBot|MJ12bot|ecoresearchCrawler|DotBot|AwarioRssBot|facebookexternalhit|Applebot|ecoresearch|CCBot|x28-job-bot|AnyEvent-HTTP|VelenPublicWebCrawler|PetalBot)" [NC]'
-      - rewrite_rule: "^.*$ - [F,L]"
-      - rewrite_rule: "^/(.*) http://127.0.0.1:10750/VirtualHostBase/https/%{literal('%')}{SERVER_NAME}:%{literal('%')}{SERVER_PORT}/ai/platform/VirtualHostRoot/$1 [P,L]" 
-    docroot: false
-    priority: false
+#  'ai-web-test.webcloud7.ch':
+#    ip: 91.92.154.92
+#    port: 80
+#    servername: 'ai-web-test.webcloud7.ch'
+#    logroot: /var/log/httpd
+#    error_log: true
+#    error_log_file: ai-web-test.webcloud7.ch-http-error.log
+#    access_log: true
+#    access_log_file: ai-web-test.webcloud7.ch-http-access.log
+#    redirect_status: 'permanent'
+#    redirect_dest: 'https://ai-web-test.webcloud7.ch/'
+#    docroot: false
+#    priority: false
+#
+#  'ai-web-test.webcloud7.ch-ssl':
+#    ip: 91.92.154.92
+#    port: 443
+#    servername: 'ai-web-test.webcloud7.ch'
+#    logroot: /var/log/httpd
+#    error_log: true
+#    error_log_file: ai-web-test.webcloud7.ch-http-error.log
+#    access_log: true
+#    access_log_file: ai-web-test.webcloud7.ch-http-access.log
+#    ssl: true
+#    ssl_cert: /etc/letsencrypt/live/ai-web-test.webcloud7.ch/cert.pem
+#    ssl_key: /etc/letsencrypt/live/ai-web-test.webcloud7.ch/privkey.pem
+#    ssl_chain: /etc/letsencrypt/live/ai-web-test.webcloud7.ch/chain.pem
+#    ssl_protocol: all -SSLv3 -TLSv1 -TLSv1.1
+#    ssl_cipher: ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384
+#    ssl_honorcipherorder: false
+#    ssl_stapling: true
+#    headers: [always set Strict-Transport-Security "max-age=63072000; includeSubDomains"]
+#    headers: [set X-Frame-Options: "ALLOW-FROM https://publicjobs.ch"]
+#    setenvif: ["Origin \"^https?://[^/]*(pam-ai.abacuscity.ch|publicjobs.ch)$\" ORIGIN=$0"]
+#    headers: ["set Access-Control-Allow-Origin %{literal('%')}{ORIGIN}e env=ORIGIN"]
+#    headers: ["set Access-Control-Allow-Credentials \"true\" env=ORIGIN"]
+#    headers: [merge Vary Origin]
+#    setenvif: [User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown downgrade-1.0 force-response-1.0]
+#    filters: [AddOutputFilterByType DEFLATE text/html text/xml text/plain, AddOutputFilterByType DEFLATE text/css, AddOutputFilterByType DEFLATE application/x-javascript application/javascript application/json]
+#    custom_fragment: |
+#      #<Location />
+#        #<RequireAny>
+#            #Require ip 46.140.112.106
+#              #Require ip 212.25.17.17
+#              #Require ip 172.29.0.0/16
+#              #Require ip 194.147.134.0/23
+#        #</RequireAny>
+#      #</Location>
+#    rewrites:
+#      - comment: "Let's Encrypt Webroot"
+#      - rewrite_rule: "^/.well-known/acme-challenge/(.*) /var/www/letsencrypt/.well-known/acme-challenge/$1 [L]"
+#      - rewrite_rule: "^/_vv($|/)(.*) https://vv-ai.4teamwork.ch/_vv/$2 [P,L]"
+#      - rewrite_rule: "^/_vk($|/)(.*) https://vk-ai.4teamwork.ch/_vk/$2 [P,L]"
+#      - rewrite_cond: '%{literal("%")}{HTTP_USER_AGENT} "(Microsoft Office|Outlook|Turnitin|Amazonbot|Reserva Room Signage|SemrushBot|BLEXBot|AhrefsBot|Yeti|DataForSeoBot|YandexBot|MegaIndex|SeekportBot|MJ12bot|ecoresearchCrawler|DotBot|AwarioRssBot|facebookexternalhit|Applebot|ecoresearch|CCBot|x28-job-bot|AnyEvent-HTTP|VelenPublicWebCrawler|PetalBot)" [NC]'
+#      - rewrite_rule: "^.*$ - [F,L]"
+#      - rewrite_rule: "^/(.*) http://127.0.0.1:10750/VirtualHostBase/https/%{literal('%')}{SERVER_NAME}:%{literal('%')}{SERVER_PORT}/ai/platform/VirtualHostRoot/$1 [P,L]" 
+#    docroot: false
+#    priority: false
 
 ############################################### END VHOST ####################################################
 
