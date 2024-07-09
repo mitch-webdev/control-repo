@@ -135,3 +135,62 @@ profile::apache::vhosts:
     priority: false
 
 ############################################### END VHOST ####################################################
+
+############################################### START VHOST ####################################################
+
+  'edk-test.webcloud7.ch':
+    ip: 91.92.154.92
+    port: 80
+    servername: 'edk-test.webcloud7.ch'
+    logroot: /var/log/httpd
+    error_log: true
+    error_log_file: edk-test.webcloud7.ch-http-error.log
+    access_log: true
+    access_log_file: edk-test.webcloud7.ch-http-access.log
+    redirect_status: 'permanent'
+    redirect_dest: 'https://edk-test.webcloud7.ch/'
+    docroot: false
+    priority: false
+
+  'edk-test.webcloud7.ch-ssl':
+    ip: 91.92.154.92
+    port: 443
+    servername: 'edk-test.webcloud7.ch'
+    logroot: /var/log/httpd
+    error_log: true
+    error_log_file: edk-test.webcloud7.ch-http-error.log
+    access_log: true
+    access_log_file: edk-test.webcloud7.ch-http-access.log
+    ssl: true
+    ssl_cert: /etc/letsencrypt/live/edk-test.webcloud7.ch/cert.pem
+    ssl_key: /etc/letsencrypt/live/edk-test.webcloud7.ch/privkey.pem
+    ssl_chain: /etc/letsencrypt/live/edk-test.webcloud7.ch/chain.pem
+    ssl_protocol: all -SSLv3 -TLSv1 -TLSv1.1
+    ssl_cipher: ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384
+    ssl_honorcipherorder: false
+    ssl_stapling: true
+    headers: [always set Strict-Transport-Security "max-age=63072000; includeSubDomains"]
+    setenvif: [User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown downgrade-1.0 force-response-1.0]
+    filters: [AddOutputFilterByType DEFLATE text/html text/xml text/plain, AddOutputFilterByType DEFLATE text/css, AddOutputFilterByType DEFLATE application/x-javascript application/javascript application/json]
+    custom_fragment: |
+      <Location />
+        AuthType Digest
+        AuthName "Login edk"
+        AuthUserFile /etc/httpd/.htdigest.edk-test
+        <RequireAny>
+            Require valid-user
+            Require ip 159.100.241.79
+        </RequireAny>
+      </Location>
+      <Location /.well-known/acme-challenge/>
+        Require all granted
+      </Location>
+    rewrites:
+      - comment: "Let's Encrypt Webroot"
+      - rewrite_rule: "^/.well-known/acme-challenge/(.*) /var/www/letsencrypt/.well-known/acme-challenge/$1 [L]"
+      - rewrite_rule: "^/(.*) http://127.0.0.1:10350/VirtualHostBase/https/%{literal('%')}{SERVER_NAME}:%{literal('%')}{SERVER_PORT}/edk.ch/platform/VirtualHostRoot/$1 [P,L]" 
+    docroot: false
+    priority: false
+
+############################################### END VHOST #####################################################
+
