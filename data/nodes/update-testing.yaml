@@ -194,3 +194,46 @@ profile::apache::vhosts:
 
 ############################################### END VHOST #####################################################
 
+############################################### START VHOST ####################################################
+
+  'extranet-lab.amnesty.ch':
+    ip: 91.92.154.92
+    port: 80
+    servername: 'extranet-lab.amnesty.ch'
+    logroot: /var/log/httpd
+    error_log: true
+    error_log_file: extranet-lab.amnesty.ch-http-error.log
+    access_log: true
+    access_log_file: extranet-lab.amnesty.ch-http-access.log
+    redirect_status: 'permanent'
+    redirect_dest: 'https://extranet-lab.amnesty.ch/'
+    docroot: false
+    priority: false
+
+  'extranet-lab.amnesty.ch-ssl':
+    ip: 91.92.154.92
+    port: 443
+    servername: 'extranet-lab.amnesty.ch'
+    logroot: /var/log/httpd
+    error_log: true
+    error_log_file: extranet-lab.amnesty.ch-http-error.log
+    access_log: true
+    access_log_file: extranet-lab.amnesty.ch-http-access.log
+    ssl: true
+    ssl_cert: /etc/pki/tls/certs/STAR.amnesty.ch.crt
+    ssl_key: /etc/pki/tls/private/STAR.amnesty.ch.key
+    ssl_chain: /etc/pki/tls/certs/STAR.amnesty.ch.ca-bundle
+    ssl_protocol: all -SSLv3 -TLSv1 -TLSv1.1
+    ssl_cipher: ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384
+    ssl_honorcipherorder: false
+    ssl_stapling: true
+    headers: [always set Strict-Transport-Security "max-age=63072000; includeSubDomains"]
+    setenvif: [User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown downgrade-1.0 force-response-1.0]
+    filters: [AddOutputFilterByType DEFLATE text/html text/xml text/plain, AddOutputFilterByType DEFLATE text/css, AddOutputFilterByType DEFLATE application/x-javascript application/javascript application/json]
+    rewrites:
+      - rewrite_rule: "^/(.*) http://127.0.0.1:10550/VirtualHostBase/https/%{literal('%')}{SERVER_NAME}:%{literal('%')}{SERVER_PORT}/extranet.amnesty.ch/platform/VirtualHostRoot/$1 [P,L]" 
+    docroot: false
+    priority: false
+
+############################################### END VHOST #####################################################
+
